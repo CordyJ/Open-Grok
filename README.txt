@@ -1,7 +1,8 @@
-Grok for Turing Plus
-Jim Cordy, October 2000
+Grok for Turing+
+Copyright (c) Richard C. Holt, James R. Cordy and others
 
-Revised for Turing+ 6.0, Jim Cordy, March 2019
+James R. Cordy, October 2000
+Revised for Turing+ 6.0, March 2019
 
 This version of Grok is written in Turing+.
 You will need to install the Open Turing+ compiler (tpc) to build it.
