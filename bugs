@@ -1,0 +1,8 @@
+Bugs in Grok34
+
+This crashes:
+    r := any relation value
+    s := { r }
+            This is illegal, but still Grok shouldn't crash
+            
+

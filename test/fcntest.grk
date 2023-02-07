@@ -1,0 +1,189 @@
+option echo
+option noverbal
+put Part 1: Set Operations
+a := {"aa"}
+b := {"bb"}
+c := {"cc"}
+d := {"dd"}
+e := {"ee"}
+f := {"ff"}
+g := {"gg"}
+h := {"hh"}
+
+a+b
+s := a + b
+s
+t := b + c
+t
+(a+b) + (b+c)
+u := s + t
+u
+s + t
+s - t
+s ^ t
+
+put Part 2: Relations Operations
+a X b
+r1 := a X b + b X c
+r1
+r2 := b X c + c X d
+(a X b) + (b X c)
+r3 := r1 + r2
+r3
+r1 + r2
+r1 - r2
+r1 ^ r2
+r1 o r2
+inv r3
+
+put Part 3: More Rel Operations
+R := r1
+R
+s
+v := s . R
+v
+s . R
+R . s
+r3 := R + c X c
+r3
+r3 - ID
+r1
+dom r1
+rng r1
+ent r1
+put part 3.5: Rel Comparisons etc.
+A := a X a
+AB := A + b X b
+A == A
+A == AB
+A ~= A
+A ~= AB
+A < AB
+A <= AB
+A > AB
+A >= AB
+EMPTYREL
+# AB
+
+D := d
+DE := D + e
+D == D
+D == DE
+D ~= D
+D ~= DE
+D < DE
+D <= DE
+D > DE
+D >= DE
+EMPTYSET
+# DE
+
+put Part 4: Yet More Rel Operations
+r9 := a X b + b X c
+r9 +
+r9
+ID
+r9 *
+r4 := ((a X b) + (b X c)) +
+r4
+r5 := r1 + r2
+r5
+s
+#s
+R
+# R
+relnames
+delrel R
+relnames
+setnames
+delset s
+setnames
+put Part 5: More Rel Operations
+s := a + b
+r1 := a X b + b X c + a X f + f X g
+delset s
+r1 
+r2
+r1 := a X b + a X c + a X d + b X b + b X c
+s := a + b
+t := c
+delsetset s t
+r1
+r1 := a X b + a X c + a X d + b X b + b X c
+slice s
+r1 := a X b + a X c + a X d + b X b + b X c
+r1
+wslice s
+r1
+s := a + b + c
+s
+addprefix "PREFIX." s
+s
+delprefix "PREFIX." s
+s
+addsuffix s ".SUFFIX"
+s
+delsuffix s ".SUFFIX"
+root := {"ROOT"}
+c1 := {"C1"}
+c2 := {"C2"}
+d1 := {"D1"}
+d2 := {"D2"}
+C := root X c1 + root X c2 + c1 X d1 + c2 X d2
+tree R
+put Part 6 ----------
+r1 := a X b + c X d
+r1
+putdb "debug.rsf"
+r1 := {"nothing"} X {"nothing"}
+getdb "debug.rsf"
+r1
+delrel r1
+adddb "debug.rsf"
+r1
+s := a + b + c
+putset s "debug.set"
+s := e
+s
+getset s "debug.set"
+s
+r6 := g X h
+r6
+r1 := a X b + b X c
+appendRelToFile r6 "debug.rsf"
+delrel r6
+delrel r1
+getdb "debug.rsf"
+r1
+r6
+t := a
+R := a X b + b X c
+w := cover t R
+w
+
+put Part 7: Number Operations
+n3 := 3
+3 + 5
+5 - 7
+8 * 2
+6 / 3
+n3 + 4
+5 div 3 
+7 mod 3
+
+put Part 8: Boolean Operators
+bt := true
+true
+not bt
+true & false
+true or false
+true and false
+not (true or false)
+
+put Part 9: String Operators
+S := "a string"
+"aaa" cat "bbb"
+S := S cat S cat ". All done"
+S
+
+// End of Grok test 'fcntest.grk'

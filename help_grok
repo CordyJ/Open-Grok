@@ -1,0 +1,214 @@
+GROK: SUMMARY OF FEATURES
+
+
+1. Grok input/output commands
+
+Grok input commands:
+   getdb F              Read RSF data base from file F
+   adddb F              Add new tuples to data base from file F
+   readdb F             Read (compressed) RSF data base from file F
+   getta F              Read TA data base from file F
+   addta F              Add more TA to date base from file F
+   getset s [F [D]]     Read  set s [from file F [in dir D]]
+
+Grok output commands:
+   putdb F              Write RSF data base to file F
+   writedb F            Write data base (compressed) to file F
+   putset s [F [D]]     Write set s [to file F [in dir D]]
+   relToFile R F        Write rel R to file F
+   appendRelToFile R F  Append rel R to file F
+   putta F              Write TA data base to file F
+   put msg              Print message msg
+
+The file format for relations for get/put is ASCII triples, eg,
+      R a b   where R relates a to b (this format is called 'RSF').
+The file format for sets is blank-separated strings.
+Beware that the read/write (compressed) format isn't portable.
+
+When TA is read in, attributes are treated as relations (with @_
+added as a prefix).  The relations and attributes at the scheme level
+have $_ prepended to their names.
+
+2. Grok relation operators:
+   R1 + R2              Union of relations
+   R1 - R2              Difference of relations
+   R1 ^ R2              Intersection of relations
+   R1 o R2              Relational composition [was previously '*']
+   inv R                Inverse of R
+   s . R                Project set s through rel R [was *]
+   R . s                Project set s through rel R backwards [was *]
+   R+                   Transitive closure of R
+   R*                   Reflective transitive closure of R
+   R1 cmp R2            Compare: cmp is == [or =], ~=, <, <=, >, >=
+   EMPTYREL             The empty relation
+   # R                  Cardinality (number of tuples) of R
+   dom R                Domain of R (a set)
+   rng R                Range of R (a set)
+   ent R                Range + domain of R (all entities in R)
+   id s                 Identity relation on set s
+   DOM                  Domain of all relations in data base (a set)
+   RNG                  Range of all relations in data base (a set)
+   ENT                  Range + domain of all relations (a set)
+   ID                   The identity relation (based on ENT)
+   head R               Head of R, eg (x y) in R produces ((x R y) head y)
+   tail R               Tail of R, eg (x y) in R produces (x tail (x R y))
+   rel2tripleset R      Make R in to a set, eg (x y) produces (x R y)
+   tripl2relname        Given '(x R y)' produce 'R'
+
+
+3. Other relation commands:
+   relnames             Print the names of relations
+   delrel R             Remove R's tuples data base
+   listdb               Print entire set of relational tuples
+   sample R [b [n] ]    Print sample from R.  Begin with
+                          number b (default 1) & print n (10)
+   slice s              Remove tuples that reference other than s
+   wslice s             Remove tuples that do not reference s
+   delset s             Remove tuples from data base that reference s
+   delsetset s t        Remove tuples with source from s and target from t
+   deldups              Delete any duplicate tuples in data base
+   dbsize               Number of tuples in data base
+   cleardb              Delete all relations
+
+4. Grok set operators:
+   s1 + s2              Union of sets
+   s1 - s2              Difference of sets
+   s1 ^ s2              Intersection of sets
+   s1 cmp s2            Compare: cmp is == [or =], ~=, <, <=, >, >=
+   # s                  Cardinality (number of elements) of s
+   s1 X s2              Cross product s1 X s2 (a relation)
+   { e1, e2, ... }      Construct set containing e1, e2, ...
+   EMPTYSET             The empty set.  You can use { } instead
+   pick s               Pick a value (a string) from s
+   prefix Q s           Set of items in s with prefix Q
+   suffix s Q           Set of items in s with suffix Q
+
+5. Other set commands:
+   setnames             Print the names of set variables
+   sample s [b [n] ]    Print sample from s.  Begin with
+                          number b (default 1) & print n (10)
+   clearsets            Delete all sets
+   addprefix Q s        Add prefix Q to items in set s
+   addsuffix s Q        Add suffix Q to items in set s
+   addprefixrel Q s     Add prefix Q to rel names in set s
+   addsuffixrel s Q     Add suffix Q to rel names in set s
+   addprefixsrc Q s     Add prefix Q to src of rel names in set s
+   addsuffixsrc s Q     Add suffix Q to src of rel names in set s
+   addprefixtrg Q s     Add prefix Q to trg of rel names in set s
+   addsuffixtrg s Q     Add suffix Q to trg of rel names in set s
+   delprefix Q s        Delete prefix Q to items in set s
+   delsuffix s Q        Delete suffix Q to items in set s
+   delprefixrel Q s     Delete prefix Q to rel names in set s
+   delsuffixrel s Q     Delete suffix Q to rel names in set s
+   delprefixsrc Q s     Delete prefix Q to src of rel names in set s
+   delsuffixsrc s Q     Delete suffix Q to src of rel names in set s
+   delprefixtrg Q s     Delete prefix Q to trg of rel names in set s
+   delsuffixtrg s Q     Delete suffix Q to trg of rel names in set s
+   duplicate s          Creates new set with elements e.dup for
+                           each element e of s, with same
+                           connecting relations as in s
+
+6. Grok number operators:
+   n1 + n2              Addition
+   n1 - n2              Subtraction
+   n1 * n2              Multiplication
+   n1 / n2              Real division
+   n1 div n2            Truncating division
+   n1 mod n2            Modulo
+   n1 cmp n2            Compare: cmp is == [or =], ~=, <, <=, >, >=
+
+7. Grok string operators
+   S1 cat S2            Catenate strings S1 and S2
+   S1 cmp S2            Compare: cmp is == [or =], ~=, <, <=, >, >=
+
+8. Grok boolean operators:
+   b1 and b2            Conjunction
+   b1 or b2             Disjunction
+   not b                Boolean negation
+
+9. Levels of precedence are, from low to high (most binding):
+   and
+   or
+   cmp                     (==, ~=, <, <=, >, >=)
+   + - cat                 (additions)
+   * X 
+   prefixOperators         (inv dom rng ent - not ~ # pick $)
+   suffixOperators         (*, +, ie, transitive closure)
+
+Parentheses (...) can be used to specify order of operations
+
+10. Statements:
+   x := expn            Assign expn to variable x (an identifier)
+ $ x := expn            Assign expn to variable whose name is in x
+       (The 'x = expn' form is considered to be obsolete.)
+
+   if expn then        Cascaded 'if' statement, with optional
+       statements      'elsif' and 'else' clauses
+   {elsif expn then
+       statements}
+   [else
+       statements]
+   end if
+
+   loop                Loop statement, stopped by 'exit'
+       statements
+   end loop
+
+   for e in s          Repeat with each element e from set s
+       statements           (exits are supported)
+   end for
+
+   exit                Exit from loop/for
+   exit when expn      Exit from loop/for when expn is true
+   return              Return from current Grok script
+   quit                Quit (halt Grok)
+
+11. Other Grok commands:
+varnames                List of all relation, set and string variables
+   $ str                String 'str' is taken as a variable's name
+   expn                 The value of expn (expression) is printed
+   exec F p1 ...        Exec file F (Grok script) with parameters p1 ...
+                             where t is each member of s
+   randdb t r n         Generate t tuples with r relations and
+                             n nodes.
+   ?                    Print the help menu
+   reset                Restart (clear relations and variables)
+
+Use '\' in last column to extend commands across line boundaries
+
+12. Setting Grok options:
+     option Q    Set option Q
+The options that can be set include:
+     timing      Print time to complete each operation
+     echo        Echo each command (useful for tracing scripts)
+     debug       Interpret 'debug comand' as 'command' (default off)
+     verbal      Print out extra info during commands
+     progress    Show progress on large operations (verbose)
+     optimize    Run fast (default)
+     heapsort    Use older sort (new pigeon hole sort is faster)
+The first six of these are
+turned off using 'no', as in 'option notiming'.
+The heapsort option can be turned off by 'option pigeonsort'
+The original slow operations can be turned on by 'option nosort'
+
+13. Limits on Sizes in Grok
+
+As of January 1998, many data sizes are dynamically increased to
+up to the maximum available memory.
+The dynamically adjusted sizes are for:
+       Number of tuples
+       Number of names
+          (Along with internal tables using for sorting, etc.)
+Sizes which are statically fixed are:
+       Maximum length of name; strSize=255 bytes, can increase to 256 at most
+       Maximum elements in a set; shortListMax=50000
+       Maximum number of sets; maxSets=100
+       Maximum tokens on a source Grok line; maxTokens=20
+
+14. Grok Version
+
+This documents version R32 of Grok
+Modified 8 Mar 99 by R.C. Holt
+
+Grok was written in the Turing language by R.C. Holt.  V. Tzerpos
+has written some parts of it.

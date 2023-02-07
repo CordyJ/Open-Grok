@@ -1,0 +1,7 @@
+C           ROOT             C1
+C           ROOT             C2
+C           C1               D1
+C           C2               D2
+r1          aa               bb
+r1          cc               dd
+r6 gg hh
