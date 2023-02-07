@@ -1,6 +1,8 @@
 
 module TAScan
 	
+    import tokenRecord, taINCLUDE, nameNum, numName, taColon, taEOF, InitGlobals
+
     export Open, Close, Scan, 
 		Token, NextToken
 

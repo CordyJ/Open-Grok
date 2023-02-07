@@ -30,6 +30,8 @@
 
 module TAParse
     
+    import nameNum, numName
+
 	export Parse,
         ParseFACTTUPLE, % This should be parsed same was as "getdb"
         ParseFACTATTRIBUTE,

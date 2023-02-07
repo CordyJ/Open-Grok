@@ -12,6 +12,8 @@
 
 module fileMgr
 
+    import var commandLinesMax
+
     export Open, Close, Get, Seek, Tell, EOF
 
     const EOFString := "### EOF ###"

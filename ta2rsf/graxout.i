@@ -1,5 +1,8 @@
 % unit
 module GraxOutput
+
+    import nameNum, numName
+
     export outputGraxTuple
 
     var printTuple : boolean := false

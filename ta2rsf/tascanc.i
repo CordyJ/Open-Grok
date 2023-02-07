@@ -2,6 +2,8 @@
 
 module TAScanClass
 
+    import tokenRecord, nameNum, taEOF
+
     export Instance, Initialize, Open, Close, Scan
 
     const dummyToken := - 13

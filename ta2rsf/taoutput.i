@@ -1,4 +1,7 @@
 module TAOutput
+
+    import nameNum, numName
+
     export outputTATuple
 
     var printTuple : boolean := false
