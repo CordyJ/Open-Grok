@@ -1,5 +1,5 @@
 Grok for Turing+
-Copyright (c) Richard C. Holt, James R. Cordy and others
+Copyright (c) 2023 Richard C. Holt, James R. Cordy and others
 
 James R. Cordy, October 2000
 Revised for Turing+ 6.0, March 2019
