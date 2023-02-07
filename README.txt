@@ -5,17 +5,15 @@ Revised for Turing+ 6.0, Jim Cordy, March 2019
 
 Limitations
 -----------
-1. The Turing Plus translation was done ignoring warnings.  
-	Lots of warnings will be generated when you compile 
-	this source if you do not specify the suppress warnings 
-	(-w) command line option.
+1. This version of Grok is written in Turing+.
+    You will need to install the Open Turing+ compiler (tpc) to build it.
+    https://github.com/CordyJ/TuringPlus
 
-2. The DRI/Legasys version of the T+ compiler, that treats 
-	unimported symbols as a warning, is required.  
-	Unimported symbols are a fatal error in the original 
-	Turing Plus compiler.
+2. The Turing Plus translation was done ignoring warnings.  
+	Many warnings will be generated when you compile this source 
+    if you do not specify the tpc -w command line option.
 
 3. Ropes (long strings) are not implemented, but are irrelevant
 	in Turing+ 6.0 since strings can be up to 4095 characters.
 
-JRC 15.3.19
+JRC 6.2.23
